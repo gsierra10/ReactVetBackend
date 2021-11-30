@@ -2,6 +2,7 @@ const { Client, Token } = require('../../models/index');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const getUsers = async(req, res) => {
     const name = req.query.fullName;
