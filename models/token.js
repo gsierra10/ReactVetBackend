@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Token.belongsTo(models.Client, {
+                allowNull: false
+            })
+            Token.belongsTo(models.Admin, {
+                allowNull: false
+            })
         }
     };
     Token.init({

@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      pets.belongsTo(models.Client,{
+        foreignKey: {
+          allowNull: false
+      }
+    })
     }
   };
   pets.init({

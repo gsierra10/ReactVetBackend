@@ -11,6 +11,16 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Client.hasMany(models.Appointment,{
+                onDelete: 'cascade'
+            })
+            Client.hasMany(models.Token,{
+                onDelete: 'cascade'
+            })
+            Client.hasMany(models.pets,{
+                onDelete: 'cascade'
+            })
+            
         }
     };
     Client.init({
