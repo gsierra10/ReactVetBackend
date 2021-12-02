@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { Token } = require('../models/index');
+const { Token } = require('../models/index')
 
 const checkToken = async(req, res, next, requiredRole) => {
     let token = null;
@@ -10,49 +10,42 @@ const checkToken = async(req, res, next, requiredRole) => {
         }
     }
 
-
     if (token) {
         try {
-            const userToken = jwt.verify(token, process.env.PRIVATE_KEY);
-            // @TODO: find token in database, if it not exists: user not authorized
-            //
-            const databaseToken = await Token.findOne({
-                where: {
-                    token: userToken,
-                    clientId: userToken.id,
-                    adminId: userToken.id
-                }
-            });
-            console.log(databaseToken);
-            //if (databaseToken) {
-            if (requiredRole == 'client' ||
-                userToken.role == 'admin' ||
-                (req.baseUrl === '/clients' && req.params.id == userToken.id) // perfil del propio cliente autenticado
-            ) {
-                req.auth = {
-                    user: userToken,
-                    token: token
-                };
-                next();
+            // const dbToken = await Token.findOne({
+            //     where:{token:token}
+            // });
+            // console.log(dbToken);
+            // if (dbToken) {
+                let userToken = jwt.verify(token, process.env.PRIVATE_KEY);
+                if (requiredRole == 'client' ||
+                    userToken.role == 'admin' ||
+                    (req.baseUrl === '/clients' && req.params.id == userToken.id) // perfil del propio cliente autenticado
+                ) {
+                    req.auth = {
+                        user: userToken,
+                        token: token
+                    };
+                    next();
 
-            } else {
-                res.json({
-                    message: 'user not authorizedm 1'
-                }, 403);
-            }
-            // } else {
+                } else {
+                    res.json({
+                        message: 'user not authorized'
+                    }, 403);
+                }
+            // }else{
             //     res.json({
-            //         message: 'user not authenticated 2'
-            //     }, 401);
+            //         message:'user not authenticate'
+            //     },401);
             // }
         } catch (error) {
             res.json({
-                message: 'user not authenticated 3'
+                message: 'user not authenticated'
             }, 401);
         }
     } else {
         res.json({
-            message: 'user not authenticated que te peines 2'
+            message: 'user not authenticated'
         }, 401);
     }
 }

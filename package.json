@@ -9,14 +9,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/manuemendoza/geekshubDent.git"
+        "url": "git+https://github.com/gsierra10/ReactVetBackend.git"
     },
-    "author": "Gustavo Sierra, Stefano  Martín, Manuel Mendoza",
+    "author": "Gustavo Sierra",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/manuemendoza/geekshubDent/issues"
+        "url": "https://github.com/gsierra10/ReactVetBackend/issues"
     },
-    "homepage": "https://github.com/manuemendoza/geekshubDent#readme",
+    "homepage": "https://github.com/gsierra10/ReactVetBackend#readme",
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "dotenv": "^10.0.0",
